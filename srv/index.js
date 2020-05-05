@@ -73,9 +73,8 @@ export default (app, http) => {
         sub: 'jwt.z52da5wt.xyz',
         room: '*'
       },
-      privateKey, {
-        keyid: 'jitsi/aeternity',
-        algorithm: 'ES512',
+      'my_jitsi_app_secret', {
+        algorithm: 'HS256',
         expiresIn: 60,
       },
     );
