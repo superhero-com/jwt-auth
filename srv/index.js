@@ -74,6 +74,7 @@ export default (app, http) => {
         room: '*'
       },
       privateKey, {
+        keyid: 'jitsi/aeternity',
         algorithm: 'ES512',
         expiresIn: 60,
       },
