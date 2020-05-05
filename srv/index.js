@@ -75,7 +75,7 @@ export default (app, http) => {
       },
       'my_jitsi_app_secret', {
         algorithm: 'HS256',
-        expiresIn: 60,
+        expiresIn: '1d',
       },
     );
     res.send(jwt);
