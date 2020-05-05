@@ -85,4 +85,8 @@ export default (app, http) => {
   app.get('/public-key', (req, res) => {
     res.send(publicKey);
   });
+
+  app.get('/22a73e97c17e6b48d4eb376ad32767aad264badfbbddaa761925141fe4a7e982.pem', (req, res) => {
+    res.send(publicKey);
+  });
 }
