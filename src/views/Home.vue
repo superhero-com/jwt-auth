@@ -10,11 +10,9 @@
 </template>
 
 <script>
-import { RpcAepp, Node } from '@aeternity/aepp-sdk/es';
+import { RpcAepp } from '@aeternity/aepp-sdk/es';
 import Detector from '@aeternity/aepp-sdk/es/utils/aepp-wallet-communication/wallet-detector';
 import BrowserWindowMessageConnection from '@aeternity/aepp-sdk/es/utils/aepp-wallet-communication/connection/browser-window-message';
-
-const nodeUrl = 'https://mainnet.aeternity.io';
 
 export default {
   data: () => ({ sdk: null }),
@@ -36,11 +34,6 @@ export default {
   async created() {
     const sdk = await RpcAepp({
       name: 'JWT token generator',
-      compilerUrl: 'https://compiler.aepps.com',
-      nodes: [{
-        name: 'why should I have node defined if I\'m not using it?',
-        instance: await Node({ url: nodeUrl, internalUrl: nodeUrl }),
-      }],
     });
     const scannerConnection = await BrowserWindowMessageConnection({
       connectionInfo: { id: 'spy' },
