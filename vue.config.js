@@ -5,4 +5,9 @@ module.exports = {
       serverDir: './srv',
     },
   },
+  configureWebpack: {
+    optimization: {
+      splitChunks: false,
+    },
+  },
 };
