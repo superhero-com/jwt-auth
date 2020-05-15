@@ -2,6 +2,7 @@ import express from 'express';
 import { decode } from '@aeternity/aepp-sdk/es/tx/builder/helpers';
 import { verifyPersonalMessage } from '@aeternity/aepp-sdk/es/utils/crypto';
 import Swagger from '@aeternity/aepp-sdk/es/utils/swagger';
+import { readFileSync } from 'fs';
 import { sign } from 'jsonwebtoken';
 import fetch from 'node-fetch';
 
@@ -18,6 +19,8 @@ class ExpressError extends Error {
 
 export default (app, http) => {
   app.use(express.json());
+
+  const moderators = readFileSync('./moderators.txt').toString().split('\n').filter(a => a);
 
   const middlewarePromise = (async () => Swagger.compose({
     methods: {
@@ -62,6 +65,7 @@ export default (app, http) => {
           user: {
             avatar: `https://robohash.org/${address}`,
             name,
+            moderator: moderators.includes(name),
           }
         },
         aud: 'aeternity-jitsi',
