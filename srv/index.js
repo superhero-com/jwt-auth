@@ -69,7 +69,7 @@ export default (app, http) => {
         sub: 'jwt.z52da5wt.xyz',
         room: '*'
       },
-      'my_jitsi_app_secret', {
+      process.env.VUE_APP_JWT_SECRET, {
         algorithm: 'HS256',
         expiresIn: '1d',
       },
