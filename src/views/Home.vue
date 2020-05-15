@@ -30,7 +30,7 @@ export default {
         },
         body: JSON.stringify({ address, message, signature }),
       })).text();
-      window.location = `https://jitsi.z52da5wt.xyz/default?jwt=${token}`;
+      window.location = `https://league.superhero.com/broadcast?jwt=${token}`;
     },
   },
   async created() {
