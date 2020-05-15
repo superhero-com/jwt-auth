@@ -5,6 +5,7 @@ import Swagger from '@aeternity/aepp-sdk/es/utils/swagger';
 import { readFileSync } from 'fs';
 import { sign } from 'jsonwebtoken';
 import fetch from 'node-fetch';
+import cors from 'cors';
 
 const messageRegExp = /^I would like to generate JWT token at (?<date>.*)$/;
 const middlewareUrl = 'https://mainnet.aeternity.io';
@@ -19,6 +20,7 @@ class ExpressError extends Error {
 
 export default (app, http) => {
   app.use(express.json());
+  app.use(cors());
 
   const moderators = readFileSync('./moderators.txt').toString().split('\n').filter(a => a);
 
