@@ -2,7 +2,6 @@ import express from 'express';
 import { decode } from '@aeternity/aepp-sdk/es/tx/builder/helpers';
 import { verifyPersonalMessage } from '@aeternity/aepp-sdk/es/utils/crypto';
 import Swagger from '@aeternity/aepp-sdk/es/utils/swagger';
-import { readFileSync } from 'fs';
 import { sign } from 'jsonwebtoken';
 import fetch from 'node-fetch';
 
@@ -19,9 +18,6 @@ class ExpressError extends Error {
 
 export default (app, http) => {
   app.use(express.json());
-
-  const publicKey = readFileSync('./public.pem');
-  const privateKey = readFileSync('./private.pem');
 
   const middlewarePromise = (async () => Swagger.compose({
     methods: {
@@ -79,13 +75,5 @@ export default (app, http) => {
       },
     );
     res.send(jwt);
-  });
-
-  app.get('/public-key', (req, res) => {
-    res.send(publicKey);
-  });
-
-  app.get('/22a73e97c17e6b48d4eb376ad32767aad264badfbbddaa761925141fe4a7e982.pem', (req, res) => {
-    res.send(publicKey);
   });
 }
