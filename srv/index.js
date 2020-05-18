@@ -66,14 +66,14 @@ export default (app, http) => {
         context: {
           user: {
             avatar: `https://robohash.org/${address}`,
-            name,
-            moderator: moderators.includes(name),
+            name
           }
         },
         aud: 'aeternity-jitsi',
         iss: 'jwt.z52da5wt.xyz',
         sub: 'jwt.z52da5wt.xyz',
-        room: '*'
+        room: '*',
+        moderator: moderators.includes(name)
       },
       process.env.VUE_APP_JWT_SECRET, {
         algorithm: 'HS256',
