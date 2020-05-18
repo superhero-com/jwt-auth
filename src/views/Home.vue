@@ -30,7 +30,7 @@ export default {
         },
         body: JSON.stringify({ address, message, signature }),
       })).text();
-      window.location = `https://league.superhero.com/broadcast?jwt=${token}`;
+      window.location = `https://test.league.aeternity.org/broadcast?jwt=${token}`;
     },
   },
   async created() {
