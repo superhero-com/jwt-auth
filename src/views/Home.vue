@@ -1,11 +1,19 @@
 <template>
   <div class="home">
-    <button
-      :disabled="!sdk"
-      @click="joinMeeting"
+    <form
+      class="wrapper"
+      @submit.prevent="joinMeeting"
     >
-      Join meeting with aeternity account
-    </button>
+      <input
+        placeholder="Enter meeting URL"
+        :value="jitsiUrl"
+        @input="$router.replace({ name: 'Home', params: { jitsiUrl: $event.target.value } })"
+      />
+
+      <button :disabled="!sdk">
+        Join meeting with aeternity account
+      </button>
+    </form>
   </div>
 </template>
 
@@ -17,6 +25,9 @@ import BrowserWindowMessageConnection from '@aeternity/aepp-sdk/es/utils/aepp-wa
 const nodeUrl = 'https://mainnet.aeternity.io';
 
 export default {
+  props: {
+    jitsiUrl: { type: String, default: 'https://test.league.aeternity.org/broadcast' },
+  },
   data: () => ({ sdk: null }),
   methods: {
     async joinMeeting() {
@@ -30,7 +41,7 @@ export default {
         },
         body: JSON.stringify({ address, message, signature }),
       })).text();
-      window.location = `https://test.league.aeternity.org/broadcast?jwt=${token}`;
+      window.location = `${this.jitsiUrl}?jwt=${token}`;
     },
   },
   async created() {
@@ -67,9 +78,16 @@ export default {
   display: flex;
   height: 100vh;
 
-  button {
+  .wrapper {
     margin: auto;
-    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+
+    input, button {
+      width: 400px;
+      margin: 5px;
+      font-size: 20px;
+    }
   }
 }
 </style>

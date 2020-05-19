@@ -6,9 +6,10 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
+    path: '/:jitsiUrl?',
     name: 'Home',
     component: Home,
+    props: true,
   },
 ];
 
