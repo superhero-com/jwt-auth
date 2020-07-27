@@ -1,11 +1,11 @@
-import express from 'express';
 import { decode } from '@aeternity/aepp-sdk/es/tx/builder/helpers';
 import { verifyPersonalMessage } from '@aeternity/aepp-sdk/es/utils/crypto';
 import Swagger from '@aeternity/aepp-sdk/es/utils/swagger';
+import cors from 'cors';
+import express from 'express';
 import { readFileSync } from 'fs';
 import { sign } from 'jsonwebtoken';
 import fetch from 'node-fetch';
-import cors from 'cors';
 
 const messageRegExp = /^I would like to generate JWT token at (?<date>.*)$/;
 const middlewareUrl = 'https://mainnet.aeternity.io';
@@ -65,18 +65,19 @@ export default (app, http) => {
       {
         context: {
           user: {
-            avatar: `https://robohash.org/${address}`,
+            avatar: `https://avatars.dicebear.com/api/avataaars/${address}.svg?mode=exclude&accessoriesChance=28&facialHairChance=27&eyes%5B%5D=cry&eyes%5B%5D=close&eyebrow%5B%5D=angry&eyebrow%5B%5D=sad&eyebrow%5B%5D=unibrow&mouth%5B%5D=concerned&mouth%5B%5D=vomit&mouth%5B%5D=disbelief&mouth%5B%5D=grimace&mouth%5B%5D=sad&mouth%5B%5D=scream`,
             name,
             address,
-          }
+          },
         },
         aud: 'aeternity-jitsi',
         iss: 'jwt.z52da5wt.xyz',
         sub: 'jwt.z52da5wt.xyz',
         room: '*',
-        moderator: moderators.includes(name)
+        moderator: moderators.includes(name),
       },
-      process.env.VUE_APP_JWT_SECRET, {
+      process.env.VUE_APP_JWT_SECRET,
+      {
         algorithm: 'HS256',
         expiresIn: '1d',
       },
