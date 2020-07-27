@@ -67,6 +67,7 @@ export default (app, http) => {
           user: {
             avatar: `https://avatars.dicebear.com/api/avataaars/${address}.svg?mode=exclude&accessoriesChance=28&facialHairChance=27&eyes%5B%5D=cry&eyes%5B%5D=close&eyebrow%5B%5D=angry&eyebrow%5B%5D=sad&eyebrow%5B%5D=unibrow&mouth%5B%5D=concerned&mouth%5B%5D=vomit&mouth%5B%5D=disbelief&mouth%5B%5D=grimace&mouth%5B%5D=sad&mouth%5B%5D=scream`,
             name,
+            address,
           },
         },
         aud: 'aeternity-jitsi',
