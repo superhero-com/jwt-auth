@@ -22,18 +22,22 @@ export default (app, http) => {
   app.use(express.json());
   app.use(cors());
 
-  const moderators = readFileSync('./moderators.txt').toString().split('\n').filter(a => a);
+  const moderators = readFileSync('./moderators.txt')
+    .toString()
+    .split('\n')
+    .filter((a) => a);
 
-  const middlewarePromise = (async () => Swagger.compose({
-    methods: {
-      urlFor: path => middlewareUrl + path,
-      axiosError: (error) => {
-        if (error) throw error;
+  const middlewarePromise = (async () =>
+    Swagger.compose({
+      methods: {
+        urlFor: (path) => middlewareUrl + path,
+        axiosError: (error) => {
+          if (error) throw error;
+        },
       },
-    },
-  })({
-    swag: await (await fetch(`${middlewareUrl}/middleware/api`)).json(),
-  }))();
+    })({
+      swag: await (await fetch(`${middlewareUrl}/middleware/api`)).json(),
+    }))();
 
   app.post('/claim', async (req, res) => {
     const { address, message, signature } = req.body;
@@ -49,12 +53,18 @@ export default (app, http) => {
     } catch (e) {
       matchRes = null;
     }
-    if (!matchRes) throw new ExpressError(400, 'Can\'t parse message content');
+    if (!matchRes) throw new ExpressError(400, "Can't parse message content");
     if (dateDiff > 60 * 1000 && dateDiff >= 0) {
       throw new ExpressError(400, 'Date in the message is outdated');
     }
 
-    if (!verifyPersonalMessage(message, Buffer.from(signature, 'hex'), decode(address))) {
+    if (
+      !verifyPersonalMessage(
+        message,
+        Buffer.from(signature, 'hex'),
+        decode(address),
+      )
+    ) {
       throw new ExpressError(400, 'Signature is not valid');
     }
 
@@ -65,7 +75,7 @@ export default (app, http) => {
       {
         context: {
           user: {
-            avatar: `https://avatars.dicebear.com/api/avataaars/${address}.svg?mode=exclude&accessoriesChance=28&facialHairChance=27&eyes%5B%5D=cry&eyes%5B%5D=close&eyebrow%5B%5D=angry&eyebrow%5B%5D=sad&eyebrow%5B%5D=unibrow&mouth%5B%5D=concerned&mouth%5B%5D=vomit&mouth%5B%5D=disbelief&mouth%5B%5D=grimace&mouth%5B%5D=sad&mouth%5B%5D=scream`,
+            avatar: `https://avatars.z52da5wt.xyz/${name}`,
             name,
             address,
           },
@@ -84,4 +94,4 @@ export default (app, http) => {
     );
     res.send(jwt);
   });
-}
+};
