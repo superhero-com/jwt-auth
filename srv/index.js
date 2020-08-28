@@ -69,7 +69,7 @@ export default (app, http) => {
     }
 
     const names = await (await middlewarePromise).api.getNameByAddress(address);
-    const name = names.length ? names[0].name : address;
+    const name = Array.isArray(names) ? names[0].name : address;
 
     const jwt = sign(
       {
