@@ -7,7 +7,7 @@ import { readFileSync } from 'fs';
 import { sign } from 'jsonwebtoken';
 import fetch from 'node-fetch';
 
-const messageRegExp = /^I would like to login with Superhero ID at (?<date>.*)$/;
+const messageRegExp = /^Login with Superhero ID at (?<date>.*)$/;
 const middlewareUrl = 'https://mainnet.aeternity.io';
 
 class ExpressError extends Error {
