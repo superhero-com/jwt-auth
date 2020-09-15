@@ -31,7 +31,7 @@ export default {
   data: () => ({ sdk: null }),
   methods: {
     async joinMeeting() {
-      const message = `I would like to generate JWT token at ${new Date().toUTCString()}`;
+      const message = `Login with Superhero ID at ${new Date().toUTCString()}`;
       const signature = await this.sdk.signMessage(message);
       const address = await this.sdk.address();
       const token = await (await fetch('/claim', {
