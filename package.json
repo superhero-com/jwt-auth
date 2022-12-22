@@ -13,7 +13,7 @@
     "@aeternity/aepp-sdk": "^7.2.1",
     "core-js": "^3.6.4",
     "cors": "^2.8.5",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "node-fetch": "^3.1.1",
     "vue": "^2.6.11",
     "vue-router": "^3.1.6",
